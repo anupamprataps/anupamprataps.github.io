@@ -15,13 +15,18 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" ></script>
 
     <!-- Extensions Library (this will be hosted on a CDN eventually) -->
-    <script src="tableau.extensions.1.latest.js"></script>
+    <script src="https://anupamprataps.github.io/tableau.extensions.1.latest.js"></script>
 
     <!-- Our extension's code -->
- <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+ <!--script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script-->
+<!--script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script-->
+<!--script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script-->
+<!--link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" /-->
+<script src="https://anupamprataps.github.io/moment.js"></script>
+<script src="https://anupamprataps.github.io/knockout-min.js"></script>
+
+<link rel="stylesheet" href="https://anupamprataps.github.io/daterangepicker.css">
+<script src="https://anupamprataps.github.io/daterangepicker.js"></script>
 
 <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
     <i class="fa fa-calendar"></i>&nbsp;
@@ -114,7 +119,7 @@ function updateExtensionBasedOnSettings (settings) {
     // and handle the return payload 
     // ...
 
-    const popupUrl = `https://anupamprataps.github.io/uiNamespaceDialog.html`
+    const popupUrl = 'https://anupamprataps.github.io/uiNamespaceDialog.html'
     const defaultIntervalInMin = '25';
 
     tableau.extensions.ui.displayDialogAsync(popupUrl, defaultIntervalInMin,par1,par2, { height: 500, width: 500 }).then((closePayload) => {
@@ -157,7 +162,7 @@ function updateExtensionBasedOnSettings (settings) {
         $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
 
-    $('#reportrange').daterangepicker({
+  /*  $('#reportrange').daterangepicker({
         startDate: start,
         endDate: end,
         ranges: {
@@ -173,6 +178,42 @@ function updateExtensionBasedOnSettings (settings) {
     
    // cb(start, end);
 
+*/
+
+
+
+      $("#reportrange").daterangepicker({
+
+        minDate: moment().subtract(2, 'years'),
+    firstDayOfWeek: 6,
+
+    callback: function(startDate, endDate, period) {
+
+              tableau.extensions.dashboardContent.dashboard.getParametersAsync().then(function (parameters) {
+        parameters.forEach(function (p) {
+          if(p.name==par1)
+          {
+           p.changeValueAsync((startDate.format('YYYY-MM-DD')).toString())
+         }
+
+          if(p.name==par2)
+          {
+           p.changeValueAsync((endDate.format('YYYY-MM-DD')).toString())
+           
+         }
+        });
+
+        // This is used to manipulate what part of the UI is visible.  If there are no parameters
+        // found, we want to give you a message to tell you that you need to add one, otherwise, we
+        // show the table we created.
+
+      });
+
+      $('#reportrange span').html(startDate.format('MMMM D, YYYY') + ' - ' + endDate.format('MMMM D, YYYY'));
+      //$(this).val(startDate.format('L') + ' – ' + endDate.format('L'));
+    }
+
+  });
 
 
 });
