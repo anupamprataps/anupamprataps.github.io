@@ -9,7 +9,7 @@
     </head>
 
     <body>
-        <h1 id="refresh" style="text-align: center;margin:0 auto;font-family: 'Trebuchet MS', sans-serif">It will refresh every 1 minute</h1>
+        <h1 id="refresh" style="text-align: center;margin:0 auto;font-family: 'Trebuchet MS', sans-serif"></h1>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="tableau.extensions.1.latest.js"></script>
 
@@ -70,7 +70,6 @@ function countdown( elementName, minutes, seconds )
         msLeft = endTime - (+new Date);
         if ( msLeft < 1000 ) {
             element.innerHTML = "countdown's over!";
-            countdown( "countdown", 0, 10 );
         } else {
             time = new Date( msLeft );
             hours = time.getUTCHours();
@@ -85,7 +84,7 @@ function countdown( elementName, minutes, seconds )
     updateTimer();
 }
 
-countdown( "countdown", 0, 10 );
+countdown( "countdown", 0, 60 );
 </script>
 
 </html>
