@@ -33,7 +33,7 @@ $(document).ready(function() {
 
 function refreshAllDataSources() {
   countdown( "countdown", 0, 60 );
-  document.getElementById("refresh").innerHTML = "Refreshing Data Sources";
+  document.getElementById("countdown").innerHTML = "refreshing";
   let dataSourceFetchPromises = [];
   let dashboardDataSources = {};
   const dashboard = tableau.extensions.dashboardContent.dashboard;
