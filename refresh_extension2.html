@@ -32,6 +32,7 @@ $(document).ready(function() {
 });
 
 function refreshAllDataSources() {
+  countdown( "countdown", 0, 60 );
   document.getElementById("refresh").innerHTML = "Refreshing Data Sources";
   let dataSourceFetchPromises = [];
   let dashboardDataSources = {};
@@ -70,7 +71,7 @@ function countdown( elementName, minutes, seconds )
     {
         msLeft = endTime - (+new Date);
         if ( msLeft < 1000 ) {
-            element.innerHTML = "countdown's over!";
+            element.innerHTML = "";
         } else {
             time = new Date( msLeft );
             hours = time.getUTCHours();
