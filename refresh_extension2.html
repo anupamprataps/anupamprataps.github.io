@@ -14,6 +14,13 @@
         <script src="tableau.extensions.1.latest.js"></script>
 
         <div id="countdown"></div>
+
+        <style>
+          #countdown {
+              color: #666666;
+              font-size: 15px;
+          }
+      </style>
     </body>
 
 <script>
@@ -76,7 +83,7 @@ function countdown( elementName, minutes, seconds )
             time = new Date( msLeft );
             hours = time.getUTCHours();
             mins = time.getUTCMinutes();
-            element.innerHTML = 'next refresh in' +(hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
+            element.innerHTML = 'next refresh in ' +(hours ? hours + ':' + twoDigits( mins ) : mins) + ':' + twoDigits( time.getUTCSeconds() );
             setTimeout( updateTimer, time.getUTCMilliseconds() + 500 );
         }
     }
