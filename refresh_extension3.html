@@ -25,7 +25,11 @@
 
 <script>
 par1=60
+
+
 $(document).ready(function() {
+
+  $(function() {
 
   tableau.extensions.initializeAsync({'configure': configure}).then(function () {
 
@@ -147,7 +151,7 @@ function countdown( elementName, minutes, seconds )
     updateTimer();
 }
 })
-
+})
 
 </script>
 
