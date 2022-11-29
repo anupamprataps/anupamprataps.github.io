@@ -39,6 +39,7 @@
 
 function closeDialog () {
     tableau.extensions.settings.set('selectedDatasources', $('#p1').val());
+    tableau.extensions.settings.set('selectedDatasources1',$('#p2').val());
    
 
     tableau.extensions.settings.saveAsync().then((newSavedSettings) => {
@@ -52,10 +53,13 @@ function closeDialog () {
   </head>
   <body>
     <div class="container">
-      <h4></h4>
+      <h4>Select Your Start and End Parameters</h4>
 
-      <label for="startdate">Set Refresh Time</label><br>
+      <label for="startdate">Start Parameter:</label><br>
       <input type="text" id="p1" name="fname"><br>
+      <label for="enddate">End Parameter:</label><br>
+      <input type="text" id="p2" name="fname"><br>
+
 
       <button id="closeButton">Apply</button>
     </div>
