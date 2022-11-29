@@ -91,7 +91,7 @@ function updateExtensionBasedOnSettings (settings) {
       let timer;
     try {
       countdown( "countdown", 0, par1 );
-      timer = setInterval(refreshAllDataSources, par1*100);
+      timer = setInterval(refreshAllDataSources, par1*1000);
       console.log("Refresh Started");
     } catch (err) {
       clearInterval(timer);
