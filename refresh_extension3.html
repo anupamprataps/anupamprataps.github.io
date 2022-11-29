@@ -104,7 +104,7 @@ function updateExtensionBasedOnSettings (settings) {
 
 
 function refreshAllDataSources() {
-  countdown( "countdown", 0, 60 );
+  countdown( "countdown", 0, par1 );
   document.getElementById("countdown").innerHTML = "refreshing";
   let dataSourceFetchPromises = [];
   let dashboardDataSources = {};
