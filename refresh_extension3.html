@@ -78,6 +78,7 @@ $(function() {
 
                    tableau.extensions.settings.addEventListener(tableau.TableauEventType.SettingsChanged, (settingsEvent) => {
                    //  alert('i am here')
+                   location.reload()
         updateExtensionBasedOnSettings(settingsEvent.newSettings);
       });
 
