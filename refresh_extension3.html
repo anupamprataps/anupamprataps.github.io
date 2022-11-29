@@ -78,7 +78,7 @@ $(function() {
 
                    tableau.extensions.settings.addEventListener(tableau.TableauEventType.SettingsChanged, (settingsEvent) => {
                    //  alert('i am here')
-                   location.reload()
+                   
         updateExtensionBasedOnSettings(settingsEvent.newSettings);
       });
 
@@ -93,10 +93,10 @@ function updateExtensionBasedOnSettings (settings) {
       let timer;
     try {
       countdown( "countdown", 0, par1 );
-    //  timer = setInterval(refreshAllDataSources, par1*1000);
+      timer = setInterval(refreshAllDataSources, par1*1000);
       console.log("Refresh Started");
     } catch (err) {
-    //  clearInterval(timer);
+      clearInterval(timer);
     }
     }
 
@@ -149,7 +149,6 @@ function countdown( elementName, minutes, seconds )
     {
         msLeft = endTime - (+new Date);
         if ( msLeft < 1000 ) {
-            refreshAllDataSources();
             element.innerHTML = "";
         } else {
             time = new Date( msLeft );
