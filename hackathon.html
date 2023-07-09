@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>royal challengers</title>
+</head>
+<body>
+  <video id="video" width="640" height="480" autoplay></video>
+  <button type="button" onclick="captureImage()">Capture Image</button>
+  <div id="resultContainer"></div>
+
+  <script>
+    // Access the camera and stream the video to the video element
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(function(stream) {
+        var videoElement = document.getElementById('video');
+        videoElement.srcObject = stream;
+      })
+      .catch(function(error) {
+        console.error(error);
+      });
+
+    function captureImage() {
+      var videoElement = document.getElementById('video');
+      var canvas = document.createElement('canvas');
+      canvas.width = videoElement.videoWidth;
+      canvas.height = videoElement.videoHeight;
+      var context = canvas.getContext('2d');
+      context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+      canvas.toBlob(function(blob) {
+        var formData = new FormData();
+        formData.append('file', blob);
+
+        fetch('http://ec2-52-77-219-230.ap-southeast-1.compute.amazonaws.com:8000/object-to-img', {
+          method: 'POST',
+          body: formData
+        })
+        .then(response => response.blob())
+        .then(blob => {
+          var img = document.createElement('img');
+          img.src = URL.createObjectURL(blob);
+          document.getElementById('resultContainer').appendChild(img);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
